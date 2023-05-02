@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+C:\Users\Lenovo\Documents\2560321-2\cristian\prim\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+1814657590.index
+3959137331.index
+545631040.index

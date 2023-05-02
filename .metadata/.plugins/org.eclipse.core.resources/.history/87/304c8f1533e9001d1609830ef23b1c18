@@ -1,0 +1,159 @@
+package nue;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+
+public class Inicio {
+		ArrayList <String> nombres;
+		ArrayList <Integer> edades;
+		
+		public Inicio () {
+			edades = new ArrayList <Integer>();
+			nombres = new ArrayList <String>();
+		}
+		public void iniciar() {
+			JOptionPane.showMessageDialog(null, "Bienvenido");
+			
+			String menu = "GESTION ESTUDIANTES\n";
+			menu+="1. Pedir datos del estudiante\n";
+			menu+="2. Imprimir estudiantes\n";
+			menu+="3. Buscar estudiantes por nombre\n";
+			menu+="4. El promedio de edades\n";
+			menu+="5. Buscar estudiantes mayores\n";
+			menu+="6. salir\n";
+			
+			int opc=0;
+			
+			do {
+				opc=Integer.parseInt(JOptionPane.showInputDialog(menu));
+				menu(opc);
+			}while(opc!=6);
+		}
+		public void menu(int opcion) {
+			switch (opcion) {
+			case 1: {
+				pedirDatos();
+				break;
+			}
+			case 2: {
+				if (validarLlenado()) {
+					imprimirDatos();	
+				}					
+				break;
+			}
+			case 3: {
+				if (validarLlenado()) {
+					buscarPorNombre();
+				}					
+				break;
+			}case 4: {
+				if (validarLlenado()) {
+					promEdades();
+				}					
+				break;
+			}
+			case 5: {
+				if (validarLlenado()) {
+					mayores();
+				}					
+				break;
+			}
+			
+			case 6: System.out.println("Chao!");			
+			break;
+			
+			
+			default:System.out.println("Ingrese bien la opcion");
+			break;
+				
+			}
+			
+		}
+		public boolean validarLlenado() {
+			if (nombres!=null) {
+				return true;	
+			}else {
+				System.out.println("Debe llenar datos");
+				return false;
+			}
+		}
+		public void pedirDatos() {
+			ArrayList<String> listTem;
+			int tam=Integer.parseInt(JOptionPane.showInputDialog
+					("Ingrese la cantidad de estudiantes"));
+			String nomEst= "";
+			int edadEst=0;
+			
+			for(int i=0; i<tam; i++) {
+				nomEst=JOptionPane.showInputDialog("Ingrese el nombre");
+				nombres.add(nomEst);
+			}
+			for(int j=0; j<tam; j++) {
+				edadEst=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad"));
+				edades.add(edadEst);
+			}
+		}
+			public void imprimirDatos() {
+				System.out.println("Imprimir info, arreglo="+nombres);
+				
+				for (int i = 0; i < nombres.size(); i++) {
+					JOptionPane.showMessageDialog(null,"Los estudiantes ingresados son:\n\n" + nombres.get(i)+",");
+				}
+				System.out.println();
+		}
+		public void buscarPorNombre() {
+			int cont=0;
+			
+			String nombreBuscar = JOptionPane.showInputDialog
+					("Ingrese el nombre a buscar");
+			
+			for (int i = 0; i<nombres.size(); i++) {
+				if(nombres.equals((nombreBuscar))) {
+					JOptionPane.showMessageDialog(null, "Se encuentró"
+							+ " a "+nombreBuscar+": "+edades.get(i));
+					cont++;
+				}
+			}
+			if (cont>0) {
+				System.out.println("Encontró a "+nombreBuscar+
+						" "+cont+" veces");
+			}else {
+				System.out.println("No encuentra a "+nombreBuscar);
+			}
+		}
+		public void promEdades(){
+			double promE =0,res=0;
+			
+			for (int i = 0; i < edades.size(); i++) {
+				promE+=edades.get(i);
+				res= promE/edades.size();
+				if(res>0 && res <18) {
+					JOptionPane.showMessageDialog(null,"el promedio de estudiantes menores es superior: "+res);
+				}else {
+					JOptionPane.showMessageDialog(null,"el promedio de estudiantes mayores es superior: "+res);
+				}
+			}
+		}
+		public void edadMax() {
+			int cont =0;
+			for(int i =0; i<edades.size(); i++) {
+				if(edades.get(i)>=18) {
+					JOptionPane.showMessageDialog(null, "Los estudiantes mayores de edad son:\n" + nombres.get(i)+ ": "+ edades.get(i));
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "No se encontraron estudiantes mayores de edad\n");
+				}
+			}
+		}
+		public void mayores() {
+			int cont =0;
+			for(int i =0; i<edades.size(); i++) {
+				if(edades.get(i)>=18) {
+					JOptionPane.showMessageDialog(null, "Los estudiantes mayores de edad son:\n\n" + nombres.get(i)+ ":\n "+ edades.get(i));
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "No se encontraron estudiantes menores de edad\n");
+				}
+			}
+		}
+
+}

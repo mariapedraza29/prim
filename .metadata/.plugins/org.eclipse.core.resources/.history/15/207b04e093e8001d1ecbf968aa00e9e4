@@ -1,0 +1,8 @@
+import Inicio;
+import prim.Iniciar;
+
+public class Proce {
+	public static void main(String [] args) {
+		new Inicio().iniciar(); 
+	}
+}

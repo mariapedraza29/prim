@@ -1,0 +1,122 @@
+package prim;
+
+import javax.swing.JOptionPane;
+
+public class Iniciar {
+		String nombres[];
+		int edades[];
+		public void iniciar() {
+			JOptionPane.showMessageDialog(null, "Bienvenido");
+			
+			String menu = "GESTION ESTUDIANTES\n";
+			menu+="1. Pedir datos del estudiante\n";
+			menu+="2. Imprimir estudiantes\n";
+			menu+="3. Buscar estudiantes por nombre\n";
+			menu+="4. El promedio de edades\n";
+			menu+="5. salir\n";
+			
+			int opc=0;
+			
+			do {
+				opc=Integer.parseInt(JOptionPane.showInputDialog(menu));
+				menu(opc);
+			}while(opc!=5);
+		}
+		public void menu(int opcion) {
+			switch (opcion) {
+			case 1: {
+				pedirDatos();
+				break;
+			}
+			case 2: {
+				if (validarLlenado()) {
+					imprimirDatos();	
+				}					
+				break;
+			}
+			case 3: {
+				if (validarLlenado()) {
+					buscarPorNombre();
+				}					
+				break;
+			}case 4: {
+				if (validarLlenado()) {
+					promEdades();
+				}					
+				break;
+			}
+			
+			case 5: System.out.println("Chao!");			
+			break;
+			
+			default:System.out.println("Ingrese bien la opcion");
+			break;
+				
+			}
+			
+		}
+		public boolean validarLlenado() {
+			if (nombres!=null) {
+				return true;	
+			}else {
+				System.out.println("Debe llenar datos");
+				return false;
+			}
+		}
+		public void pedirDatos() {
+			int tam=Integer.parseInt(JOptionPane.showInputDialog
+					("Ingrese la cantidad de estudiantes"));
+			nombres=new String [tam];
+			edades=new int [tam];
+			
+			for(int i=0; i<nombres.length; i++) {
+				nombres[i]=JOptionPane.showInputDialog("Ingrese el nombre");
+			}
+			for(int j=0; j<edades.length; j++) {
+				edades[j]=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad"));
+			}
+		}
+			public void imprimirDatos() {
+				System.out.println("Imprimir info, arreglo="+nombres);
+				for (int i = 0; i < nombres.length; i++) {
+					JOptionPane.showMessageDialog(null,"Los estudiantes ingresados son:\n\n" + nombres[i]+",");
+				}
+				System.out.println();
+		}
+		public void buscarPorNombre() {
+			int cont=0;
+			
+			String nombreBuscar = JOptionPane.showInputDialog
+					("Ingrese el nombre a buscar");
+			
+			for (int i = 0; i<nombres.length; i++) {
+				if(nombres[i].equalsIgnoreCase((nombreBuscar))) {
+					JOptionPane.showMessageDialog(null, "Se encuentró|||"
+							+ " a "+nombreBuscar+
+							" en la pos: "+i);
+					cont++;
+				}
+			}
+			if (cont>0) {
+				System.out.println("Encontró a "+nombreBuscar+
+						" "+cont+" veces");
+			}else {
+				System.out.println("No encuentra a "+nombreBuscar);
+			}
+		}
+		public void promEdades(){
+			double promE =0,res=0;
+			
+			for (int i = 0; i < edades.length; i++) {
+				promE+=edades[i];
+				res= promE/(edades.length+1);
+				if(res>0 && res <18) {
+					JOptionPane.showMessageDialog(null,"el promedio de estudiantes menores es superior: "+res);
+				}else {
+					JOptionPane.showMessageDialog(null,"el promedio de estudiantes mayores es superior: "+res);
+				}
+			}
+			
+			
+		}
+}
